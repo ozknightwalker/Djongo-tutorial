@@ -95,9 +95,15 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'djongo-tutorial-database',
+        'CLIENT': {
+           'host': os.environ.get("DATABASE_HOST", "mongodb"),
+           'port': int(os.environ.get("DATABASE_PORT", "27017"))
+        },
+        'NAME': os.environ.get("DATABASE_NAME", "djongo-tutorial-database")
     }
 }
+
+print("DATABASES:", DATABASES)
 
 
 # Password validation
